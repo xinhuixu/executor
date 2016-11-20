@@ -5,21 +5,35 @@
 
 int main() {
   char buf[50];
-  char * buffer = buf;
   printf("what's good:\n");
+  
   fgets(buf, sizeof(buf), stdin);
-
-  buffer = strsep(&buffer, "\n");
-
+  
+  char * bufadd = buf;
+  
+  printf("value of buf: %s\n",buf);
+  printf("address of buf: %u\n",&buf);
+  printf("value of bufadd: %u\n",bufadd);
+  printf("address of bufadd: %u\n",&bufadd);
+  
+  printf("\tstrippin newline\n");
+  bufadd = strsep(&bufadd, "\n");
+  
+  printf("value of buf: %s\n",buf);
+  printf("value of bufadd: %u\n",bufadd);
+  
   char *command[10];
 
   int i = 0;
-  while (buffer) {
-    command[i] = strsep(&buffer, " ");
+  while (bufadd) {
+    command[i] = strsep(&bufadd, " ");
     i++;
   }
 
   command[i] = 0;
+  
+  
+  printf("\texecute\n");
   execvp( command[0], command );
 
   return 0;
